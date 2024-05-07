@@ -54,7 +54,7 @@ dependencies {
     implementation(fileTree('C:/.program/java/.libraries/jackson/jackson-databind-2.13.3.jar'))
     implementation(fileTree('C:/.program/java/.libraries/jackson/jackson-annotations-2.13.3.jar'))
     implementation(fileTree('libs/linear-math-vanilla-3.0.0-rc.jar'))
-    implementation(fileTree('C:/.program/java/.libraries/vecmath/vecmath-mine/vector-math-annotaion/out/artifacts/vector_math_annotaion_1_0_0/vector-math-annotaion-1.0.0.jar'))
+    implementation(fileTree('libs/linear-math-annotaion-1.0.0.jar'))
     implementation 'org.jetbrains:annotations:24.0.0'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'

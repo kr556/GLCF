@@ -16,7 +16,7 @@ import static java.lang.Math.*;
 
 public class WinMainTest extends WindowMain {
     static {
-        WindowMain.registEntryPoint(new WinMainTest());
+        registEntryPoint(new WinMainTest());
     }
 
     float div = 0.0f;
@@ -26,49 +26,50 @@ public class WinMainTest extends WindowMain {
 
     @Override
     public void wmain(String[] args, Window window) {
-        VAO v = getDounutVAO(1024, 0.4);
-
-        VFShader shader = getVFShader("d");
-        shader.compile(v);
-
-        Model m = new Model(v);
-        m.setShader(shader);
-        m.setDrawMode(GL11.GL_LINE_STRIP);
-        m.setRoot(window);
-        m.setShaderUniform((s, t) -> {
-            s.setUniformm("world", Matrix4f.DIAGONAL.clone()
-                    .scale(size)
-                    .rotate(mdelta.len(), new Vector4f((float) mdelta.y * 10, (float) -mdelta.x * 10, 1, 0)));
-            s.setUniform("div", div);
-            s.setUniformvf("mPos", (float) mpos.x, (float) mpos.y);
-        });
-
-        window.frameRun(w -> {
-            MouseMapper mm = w.getMouseMapper();
-            Vector2d md = mm.getScroll();
-
-            mpos = mm.getPos();
-
-            if (mm.scrolled()) {
-                div += (float) md.x * 2;
-                size += (float) (md.y * 0.2);
-            }
-
-            if (mm.getAction() == GLFW.GLFW_PRESS) {
-                mdelta.add(mm.getDeltaPos());
-            }
-        });
-
-        window.add(m);
-
-        shader.compile(v);
+        window.set().show();
+//        VAO v = getDounutVAO(1024, 0.4);
+//
+//        VFShader shader = getVFShader("d");
+//        shader.compile(v);
+//
+//        Model m = new Model(v);
+//        m.setShader(shader);
+//        m.setDrawMode(GL11.GL_LINE_STRIP);
+//        m.setRoot(window);
+//        m.setShaderUniform((s, t) -> {
+//            s.setUniformm("world", Matrix4f.DIAGONAL.clone()
+//                    .scale(size)
+//                    .rotate(mdelta.len(), new Vector4f((float) mdelta.y * 10, (float) -mdelta.x * 10, 1, 0)));
+//            s.setUniform("div", div);
+//            s.setUniformvf("mPos", (float) mpos.x, (float) mpos.y);
+//        });
+//
+//        window.frameRun(w -> {
+//            MouseMapper mm = w.getMouseMapper();
+//            Vector2d md = mm.getScroll();
+//
+//            mpos = mm.getPos();
+//
+//            if (mm.scrolled()) {
+//                div += (float) md.x * 2;
+//                size += (float) (md.y * 0.2);
+//            }
+//
+//            if (mm.getAction() == GLFW.GLFW_PRESS) {
+//                mdelta.add(mm.getDeltaPos());
+//            }
+//        });
+//
+//        window.add(m);
+//
+//        shader.compile(v);
     }
 
     public static VFShader getVFShader(String shaderName) {
         StringBuilder v = new StringBuilder();
         StringBuilder f = new StringBuilder();
-        try (BufferedReader vin = new BufferedReader(new InputStreamReader(Test000.class.getResourceAsStream("glcf/gl/" + shaderName + ".vs")));
-             BufferedReader fin = new BufferedReader(new InputStreamReader(Test000.class.getResourceAsStream("glcf/gl/" + shaderName +".fs")))) {
+        try (BufferedReader vin = new BufferedReader(new InputStreamReader(Test000.class.getResourceAsStream("glcf_test/gl/" + shaderName + ".vs")));
+             BufferedReader fin = new BufferedReader(new InputStreamReader(Test000.class.getResourceAsStream("glcf_test/gl/" + shaderName +".fs")))) {
             vin.lines().forEach(l -> v.append("\n").append(l));
             fin.lines().forEach(l -> f.append("\n").append(l));
         } catch (IOException e) {

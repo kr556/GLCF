@@ -1,5 +1,8 @@
 import org.glcf.main.*;
 import org.glcf.main.Window;
+import org.glcf.main.gui.GLColor;
+import org.glcf.main.gui.GLRectangle;
+import org.glcf.main.gui.GUIModel;
 import org.glcf.main.gui.GUIShader;
 import org.linear.main.vector.Vector4f;
 
@@ -21,8 +24,11 @@ public final class StaticTest extends WindowMain {
 //    }
     @Override
     public void wmain(String[] args, Window window) {
-        window.set().hide();
-        VFShader s = Test000.getVFShader("d");
-        System.out.println(s.getVertexSrc().formatLine().getVariable());
+        window.set().show();
+
+        GUIModel gm = new GUIModel(p -> p
+                .setBound(new GLRectangle(0, 0, 0.5, 0.5))
+                .setBackground(new GLColor(1, 1, 1, 1)));
+        window.add(gm);
     }
 }
